@@ -217,16 +217,16 @@ function submitForm() {
             <h2>Копия документа, подтверждающего право собственности*</h2>
             <input type="file" accept=".pdf,.jpg,.jpeg,.png" multiple @change="handleFiles" />
             <span class="upload-icon">Добавить файл</span>
+            <ul v-if="files.length" class="file-list">
+              <li v-for="item in files" :key="item.id">
+                {{ item.file.name }}
+              </li>
+            </ul>
             <span class="upload-hint"
               >Прикрепить можно 5 файлов формата PDF, JPEG, PNG размером до 20 МБ</span
             >
           </label>
 
-          <ul v-if="files.length" class="file-list">
-            <li v-for="item in files" :key="item.id">
-              {{ item.file.name }}
-            </li>
-          </ul>
         </section>
       </div>
 
@@ -330,10 +330,6 @@ input:not([type='radio']) {
   display: flex;
   flex-direction: row;
   gap: 20px;
-}
-
-.form-section[name='files'] {
-  max-height: 241px;
 }
 
 input[type='file'] {
@@ -471,8 +467,11 @@ input[type='radio']:checked {
 }
 
 .file-list {
-  padding-left: 20px;
-  overflow-wrap: anywhere;
-  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  min-width: 0;
+  flex-wrap: wrap;
+  font-size: 12px;
 }
 </style>
