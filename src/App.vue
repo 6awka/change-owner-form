@@ -85,7 +85,11 @@ function handleFiles(event) {
     return
   }
 
-  files.value = selectedFiles
+   files.value = selectedFiles.map(file => ({
+    id: crypto.randomUUID(),
+    file,
+  }))
+
 }
 
 function submitForm() {
@@ -219,8 +223,8 @@ function submitForm() {
           </label>
 
           <ul v-if="files.length" class="file-list">
-            <li v-for="(file, index) in files" :key="file.name + index">
-              {{ file.name }}
+            <li v-for="item in files" :key="item.id">
+              {{ item.file.name }}
             </li>
           </ul>
         </section>
